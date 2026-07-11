@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+type ExperienceModule = {
+  frontmatter: {
+    title: string;
+    summary: string;
+    image?: string;
+    role?: string;
+    organization?: string;
+    period?: string;
+    location?: string;
+    tags?: string[];
+    source?: string;
+  };
+  Content: AstroComponentFactory;
+};
+
+export function getStaticPaths() {
+  const modules = import.meta.glob<ExperienceModule>("../../content/experience/*.md", { eager: true });
+
+  return Object.entries(modules).map(([path, module]) => ({
+    params: { slug: path.split("/").pop()?.replace(".md", "") },
+    props: { role: module },
+  }));
+}
+
+const { role } = Astro.props;
+const { frontmatter } = role;
+const Content = role.Content;
+---
+
+<BaseLayout title={`${frontmatter.title} | Kwaku Richter`} description={frontmatter.summary}>
+  <article class="article-shell article">
+    <p class="eyebrow">Experience</p>
+    <h1>{frontmatter.title}</h1>
+    <div class="article-meta">
+      {frontmatter.period && <span class="tag">{frontmatter.period}</span>}
+      {frontmatter.location && <span class="tag">{frontmatter.location}</span>}
+      {(frontmatter.tags ?? []).map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+    <p class="lede">{frontmatter.summary}</p>
+    {frontmatter.image && <img class="article-hero" src={frontmatter.image} alt="" />}
+    <Content />
+    <div class="card-actions">
+      {frontmatter.source && <a class="button secondary" href={frontmatter.source}>Original WordPress page</a>}
+      <a class="button secondary" href="/experience/">All experience</a>
+    </div>
+  </article>
+</BaseLayout>

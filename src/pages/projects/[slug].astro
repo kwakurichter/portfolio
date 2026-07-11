@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+type ProjectModule = {
+  frontmatter: {
+    title: string;
+    summary: string;
+    image?: string;
+    tags?: string[];
+    period?: string;
+    source?: string;
+    download?: string;
+  };
+  Content: AstroComponentFactory;
+};
+
+export function getStaticPaths() {
+  const modules = import.meta.glob<ProjectModule>("../../content/projects/*.md", { eager: true });
+
+  return Object.entries(modules).map(([path, module]) => ({
+    params: { slug: path.split("/").pop()?.replace(".md", "") },
+    props: { project: module },
+  }));
+}
+
+const { project } = Astro.props;
+const { frontmatter } = project;
+const Content = project.Content;
+---
+
+<BaseLayout title={`${frontmatter.title} | Kwaku Richter`} description={frontmatter.summary}>
+  <article class="article-shell article">
+    <p class="eyebrow">Project</p>
+    <h1>{frontmatter.title}</h1>
+    <div class="article-meta">
+      {frontmatter.period && <span class="tag">{frontmatter.period}</span>}
+      {(frontmatter.tags ?? []).map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+    <p class="lede">{frontmatter.summary}</p>
+    {frontmatter.image && <img class="article-hero" src={frontmatter.image} alt="" />}
+    <Content />
+    <div class="card-actions">
+      {frontmatter.download && <a class="button" href={frontmatter.download}>Download source report</a>}
+      {frontmatter.source && <a class="button secondary" href={frontmatter.source}>Original source</a>}
+      <a class="button secondary" href="/projects/">All projects</a>
+    </div>
+  </article>
+</BaseLayout>

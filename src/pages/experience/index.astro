@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+type ContentModule = {
+  frontmatter: {
+    title: string;
+    role?: string;
+    organization?: string;
+    period?: string;
+    summary: string;
+    image?: string;
+    order?: number;
+    tags?: string[];
+  };
+};
+
+const modules = import.meta.glob<ContentModule>("../../content/experience/*.md", { eager: true });
+const roles = Object.entries(modules)
+  .map(([path, module]) => ({
+    slug: path.split("/").pop()?.replace(".md", "") ?? "",
+    ...module.frontmatter,
+  }))
+  .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+---
+
+<BaseLayout title="Experience | Kwaku Richter">
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Experience</p>
+        <h1>Roles, research, and engineering practice.</h1>
+      </div>
+      <p>
+        A compact record of the roles and academic work behind the projects:
+        embedded robotics, mechanical building systems, HVAC design, and asset data.
+      </p>
+    </div>
+    <div class="grid two">
+      {roles.map((role) => (
+        <article class="card">
+          {role.image && <img src={role.image} alt="" />}
+          <div class="card-body">
+            <div class="card-meta">
+              {role.period && <span class="tag">{role.period}</span>}
+              {(role.tags ?? []).slice(0, 2).map((tag) => <span class="tag">{tag}</span>)}
+            </div>
+            <h3>{role.title}</h3>
+            <p>{role.organization}</p>
+            <p>{role.summary}</p>
+            <a class="card-link" href={`/experience/${role.slug}/`}>Read more</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
