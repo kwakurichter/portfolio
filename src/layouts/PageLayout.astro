@@ -7,7 +7,6 @@ const { frontmatter } = Astro.props;
 <BaseLayout title={`${frontmatter.title} | Kwaku Richter`} description={frontmatter.description}>
   <article class="article-shell article">
     <p class="eyebrow">{frontmatter.eyebrow ?? "Portfolio"}</p>
-    <h1>{frontmatter.title}</h1>
     <slot />
   </article>
 </BaseLayout>

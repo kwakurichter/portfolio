@@ -718,6 +718,36 @@ const navItems = [
     margin-top: 1.8rem;
   }
 
+  .article-photo {
+    margin: 32px 0;
+  }
+
+  .article-photo img,
+  .article-media-row img {
+    width: 100%;
+    border: 1px solid var(--line);
+  }
+
+  .article-photo img {
+    height: auto;
+  }
+
+  .article-media-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.42fr) minmax(0, 0.58fr);
+    gap: 30px;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .article-media-row img {
+    height: auto;
+  }
+
+  .article-media-row h3 {
+    margin-top: 0;
+  }
+
   .article-hero {
     width: 100%;
     max-height: 520px;
@@ -760,6 +790,7 @@ const navItems = [
     .hero,
     .section-head,
     .split,
+    .article-media-row,
     .intro-band .inner {
       grid-template-columns: 1fr;
     }
