@@ -28,6 +28,7 @@ export function getStaticPaths() {
 const { role } = Astro.props;
 const { frontmatter } = role;
 const Content = role.Content;
+const sourceLabel = frontmatter.source?.includes("github.com") ? "View repository" : "Original WordPress page";
 ---
 
 <BaseLayout title={`${frontmatter.title} | Kwaku Richter`} description={frontmatter.summary}>
@@ -43,7 +44,7 @@ const Content = role.Content;
     {frontmatter.image && <img class="article-hero" src={frontmatter.image} alt="" />}
     <Content />
     <div class="card-actions">
-      {frontmatter.source && <a class="button secondary" href={frontmatter.source}>Original WordPress page</a>}
+      {frontmatter.source && <a class="button secondary" href={frontmatter.source}>{sourceLabel}</a>}
       <a class="button secondary" href="/experience/">All experience</a>
     </div>
   </article>

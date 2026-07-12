@@ -10,6 +10,7 @@ type ProjectModule = {
     period?: string;
     source?: string;
     download?: string;
+    downloadLabel?: string;
   };
   Content: AstroComponentFactory;
 };
@@ -26,6 +27,7 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 const { frontmatter } = project;
 const Content = project.Content;
+const sourceLabel = frontmatter.source?.includes("github.com") ? "View repository" : "Original source";
 ---
 
 <BaseLayout title={`${frontmatter.title} | Kwaku Richter`} description={frontmatter.summary}>
@@ -40,8 +42,12 @@ const Content = project.Content;
     {frontmatter.image && <img class="article-hero" src={frontmatter.image} alt="" />}
     <Content />
     <div class="card-actions">
-      {frontmatter.download && <a class="button" href={frontmatter.download}>Download source report</a>}
-      {frontmatter.source && <a class="button secondary" href={frontmatter.source}>Original source</a>}
+      {
+        frontmatter.download && (
+          <a class="button" href={frontmatter.download}>{frontmatter.downloadLabel ?? "Download source report"}</a>
+        )
+      }
+      {frontmatter.source && <a class="button secondary" href={frontmatter.source}>{sourceLabel}</a>}
       <a class="button secondary" href="/projects/">All projects</a>
     </div>
   </article>
