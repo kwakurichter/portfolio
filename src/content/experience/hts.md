@@ -5,7 +5,7 @@ organization: "HTS Engineering"
 period: "Sep 2023-Dec 2023"
 location: "Vaughan, ON"
 summary: "Designed commercial and residential refrigerant heating/cooling systems while building client-facing HVAC design experience."
-image: "/images/projects/hvac-greenhouse.jpg"
+image: "/images/experience/site_visit.jpg"
 tags: ["HVAC", "Sales Engineering", "Design"]
 order: 4
 source: "https://kwakurichter.wordpress.com/2024/05/27/engineering-sales/"

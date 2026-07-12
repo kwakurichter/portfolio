@@ -5,7 +5,7 @@ organization: "University of Waterloo"
 period: "Sep 2019-Jun 2024"
 location: "Waterloo, ON"
 summary: "Completed a co-op mechanical engineering degree with distinction, hands-on design projects, and four co-op internships."
-image: "/images/projects/packerpro.png"
+image: "/images/projects/best_prototype_award.JPG"
 tags: ["Mechanical Engineering", "Co-op", "Design"]
 order: 6
 source: "https://kwakurichter.wordpress.com/2024/05/27/mechanical-engineering-co-op/"

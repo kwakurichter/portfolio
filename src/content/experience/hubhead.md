@@ -5,7 +5,7 @@ organization: "NRX AssetHub"
 period: "May 2020-Dec 2021"
 location: "Markham, ON"
 summary: "Restructured SAP asset data, maintenance manuals, digital parts books, and work instructions for industrial clients."
-image: "/images/projects/ssd-report.png"
+image: "/images/experience/shell_platform.jpg"
 tags: ["SAP PM", "Asset Data", "Technical Documentation"]
 order: 5
 ---
