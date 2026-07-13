@@ -28,7 +28,11 @@ export function getStaticPaths() {
 const { role } = Astro.props;
 const { frontmatter } = role;
 const Content = role.Content;
-const sourceLabel = frontmatter.source?.includes("github.com") ? "View repository" : "Original WordPress page";
+const sourceLabel = frontmatter.source?.includes("github.com")
+  ? "View repository"
+  : frontmatter.source?.includes("discuss.ardupilot.org")
+    ? "Original project post"
+    : "Original WordPress page";
 ---
 
 <BaseLayout title={`${frontmatter.title} | Kwaku Richter`} description={frontmatter.summary}>
